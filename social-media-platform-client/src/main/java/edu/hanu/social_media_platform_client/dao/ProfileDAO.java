@@ -43,9 +43,9 @@ public class ProfileDAO {
 		return response;
 	}
 	
-	public void update(Profile profile, String profilename) {
+	public void update(Profile profile) {
 		Response response = resourceTargetId.resolveTemplate("resourceName", "profiles")
-				.resolveTemplate("resourceId", profilename)
+				.resolveTemplate("resourceId", profile.getProfileName())
 				.request()
 				.put(Entity.json(profile));
 		if (response.getStatus() != 200) {
