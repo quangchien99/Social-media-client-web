@@ -10,56 +10,56 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import edu.hanu.social_media_platform_client.model.Like;
+import edu.hanu.social_media_platform_client.model.Comment;
 
-public class LikeDAO implements DAO<Like>{
+public class CommentDAO implements DAO<Comment> {
 	private Client client = ClientBuilder.newClient();
 	private final WebTarget baseTarget = client.target("http://localhost:8080/social-media-platform-server/webapi");
 	private WebTarget resourceTarget = baseTarget.path("/{resourceName}");
 	private WebTarget resourceTargetId;
 
-	public LikeDAO() {
+	public CommentDAO() {
 		resourceTargetId = resourceTarget.path("/{resourceId}");
 	}
 
-	public Like get(long id) {
-		Like like = resourceTargetId.resolveTemplate("resourceName", "likes")
-				.resolveTemplate("resourceId", id).request(MediaType.APPLICATION_JSON).get(Like.class);
-		return like;
+	public Comment get(long id) {
+		Comment comment = resourceTargetId.resolveTemplate("resourceName", "comments")
+				.resolveTemplate("resourceId", id).request(MediaType.APPLICATION_JSON).get(Comment.class);
+		return comment;
 	}
 
-	public void save(Like like) {
-		Response response = resourceTarget.resolveTemplate("resourceName", "likes").request()
-				.post(Entity.json(like));
+	public void save(Comment comment) {
+		Response response = resourceTarget.resolveTemplate("resourceName", "comments").request()
+				.post(Entity.json(comment));
 		if (response.getStatus() != 201) {
 			System.err.println("error");
 		}
 	}
 	
-	public List<Like> getAll() {
-		List<Like> response = resourceTargetId.resolveTemplate("resourceName", "likes")
+	public List<Comment> getAll() {
+		List<Comment> response = resourceTargetId.resolveTemplate("resourceName", "comments")
 												.request(MediaType.APPLICATION_JSON)
-												.get(new GenericType<List<Like>>() {});
+												.get(new GenericType<List<Comment>>() {});
 		return response;
 	}
 	
-	public void update(Like like) {
-		Response response = resourceTargetId.resolveTemplate("resourceName", "likes")
-				.resolveTemplate("resourceId", like.getId())
+	public void update(Comment comment) {
+		Response response = resourceTargetId.resolveTemplate("resourceName", "comments")
+				.resolveTemplate("resourceId", comment.getId())
 				.request()
-				.put(Entity.json(like));
+				.put(Entity.json(comment));
 		if (response.getStatus() != 204) {
-			System.err.println("LikeDAO.update()");
+			System.err.println("CommentDAO.update()");
 		}
 	}
 	
 	public void delete(long id) {
-		Response response = resourceTargetId.resolveTemplate("resourceName", "likes")
+		Response response = resourceTargetId.resolveTemplate("resourceName", "comments")
 				.resolveTemplate("resourceId", id)
 				.request()
 				.delete();
 		if (response.getStatus() != 204) {
-			System.err.println("LikeDAO.delete()");
+			System.err.println("CommentDAO.delete()");
 		}
 	}
 	public static void main(String[] args) {
@@ -70,7 +70,7 @@ public class LikeDAO implements DAO<Like>{
 //		p.setPassword("123456");
 //		p.setQuestion("what is favorite book ?");
 //		p.setAnswer("harry potter");
-		LikeDAO dao = new LikeDAO();
+		CommentDAO dao = new CommentDAO();
 //		dao.save(p);
 		
 		System.out.println(dao.get(1).toString());
