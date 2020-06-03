@@ -61,7 +61,7 @@ public class UserLoginServlet extends HttpServlet {
 				session.setAttribute("name", name);
 				session.setAttribute("pass", pass);
 //				request.getSession().setAttribute("user", user);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/comment.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home");
 				dispatcher.forward(request, response);
 			} else {
 				HttpSession session = request.getSession();

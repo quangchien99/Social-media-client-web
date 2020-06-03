@@ -41,4 +41,40 @@
 		<servlet-name>UserChangePasswordController</servlet-name>
 		<url-pattern>/changePassword</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserPostStatusController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.PostStatusServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserPostStatusController</servlet-name>
+		<url-pattern>/postStatus</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>HomeController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.HomePageServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeController</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CommentController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.CommentServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommentController</servlet-name>
+		<url-pattern>/comment</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LikeController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.LikeServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LikeController</servlet-name>
+		<url-pattern>/like</url-pattern>
+	</servlet-mapping>
 </web-app>

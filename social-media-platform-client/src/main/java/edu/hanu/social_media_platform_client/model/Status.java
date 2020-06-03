@@ -1,7 +1,6 @@
 package edu.hanu.social_media_platform_client.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Status {

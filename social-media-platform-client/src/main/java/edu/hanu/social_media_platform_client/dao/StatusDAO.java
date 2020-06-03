@@ -14,7 +14,7 @@ import edu.hanu.social_media_platform_client.model.Status;
 
 public class StatusDAO implements DAO<Status>{
 	private Client client = ClientBuilder.newClient();
-	private final WebTarget baseTarget = client.target("http://localhost:8080/social-media-platform-server/webapi");
+	private final WebTarget baseTarget = client.target("http://localhost:8080/social-media-platform/webapi");
 	private WebTarget resourceTarget = baseTarget.path("/{resourceName}");
 	private WebTarget resourceTargetId;
 
@@ -31,13 +31,14 @@ public class StatusDAO implements DAO<Status>{
 	public void save(Status status) {
 		Response response = resourceTarget.resolveTemplate("resourceName", "statuses").request()
 				.post(Entity.json(status));
+		System.out.println(response.getStatus());
 		if (response.getStatus() != 201) {
 			System.err.println("error");
 		}
 	}
 	
 	public List<Status> getAll() {
-		List<Status> response = resourceTargetId.resolveTemplate("resourceName", "statuses")
+		List<Status> response = resourceTarget.resolveTemplate("resourceName", "statuses")
 												.request(MediaType.APPLICATION_JSON)
 												.get(new GenericType<List<Status>>() {});
 		return response;
