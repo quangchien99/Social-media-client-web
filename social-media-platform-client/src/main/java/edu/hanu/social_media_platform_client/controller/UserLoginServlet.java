@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.hanu.social_media_platform_client.dao.ProfileDAO;
+import edu.hanu.social_media_platform_client.model.Profile;
 import edu.hanu.social_media_platform_client.service.ProfileService;
 
 /**
@@ -18,6 +20,7 @@ import edu.hanu.social_media_platform_client.service.ProfileService;
 
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	ProfileDAO profileDAO = new ProfileDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -61,6 +64,11 @@ public class UserLoginServlet extends HttpServlet {
 				session.setAttribute("name", name);
 				session.setAttribute("pass", pass);
 //				request.getSession().setAttribute("user", user);
+				String profileName = (String) session.getAttribute("name");
+				Profile profile = new Profile();
+				profile = profileDAO.get(profileName);
+				session.setAttribute("firstName", profile.getFirstName());
+				session.setAttribute("lastName", profile.getLastName());
 				RequestDispatcher dispatcher = request.getRequestDispatcher("home");
 				dispatcher.forward(request, response);
 			} else {

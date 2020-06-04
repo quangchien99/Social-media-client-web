@@ -37,7 +37,7 @@ public class HomePageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +59,7 @@ public class HomePageServlet extends HttpServlet {
 			System.out.println(comment.toString());
 		}
 		// comments = getCommentInPost(Integer.parseInt(statusId));
-		// comments.get(0).getStatus().getId()
+		// comments.get(0).getCreated()
 		request.setAttribute("comments", comments);
 		request.setAttribute("statuses", statuses);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/homePage.jsp");

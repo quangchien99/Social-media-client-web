@@ -77,4 +77,15 @@
 		<servlet-name>LikeController</servlet-name>
 		<url-pattern>/like</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProfileController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.ProfileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProfileController</servlet-name>
+		<url-pattern>/profile</url-pattern>
+	</servlet-mapping>
+
 </web-app>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
 	<nav
 		class="navbar navbar-icon-top sticky-top navbar-expand-lg navbar-light"
 		style="background-color: #AACFCF">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/home"><img
+		<a class="navbar-brand" href="http://hanu.vn/vn/"><img
 			src="${pageContext.request.contextPath}/image/icon.png" width="50"
 			height="50" alt="Home Page"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -35,11 +35,11 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link"
-					href="${pageContext.request.contextPath}/view/user/homePage.jsp"> <i class="fa fa-home"></i> Home <span
+					href="${pageContext.request.contextPath}/home"> <i class="fa fa-home"></i> Home <span
 						class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/view/user/profile.jsp"> <i class="fa fa-user"> </i>
+					href="${pageContext.request.contextPath}/profile"> <i class="fa fa-user"> </i>
 						Profile
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -54,8 +54,14 @@
 				</a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<a href="${pageContext.request.contextPath}/view/user/profile.jsp" class="hello h5">Hello! Khanh
-					Linh</a> &nbsp;&nbsp;&nbsp;&nbsp; <input
+				<a href="${pageContext.request.contextPath}/profile" class="hello h5">
+  <%
+      String firstName = (String) session.getAttribute("firstName");
+  String lastName = (String) session.getAttribute("lastName");
+      out.print("Hello " + firstName + " " + lastName);
+  %>
+				
+				</a> &nbsp;&nbsp;&nbsp;&nbsp; <input
 					class="form-control form-control-lg" width="200" type="text"
 					placeholder="Search" aria-label="Search">
 				&nbsp;&nbsp;&nbsp;&nbsp;

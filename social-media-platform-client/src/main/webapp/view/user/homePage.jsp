@@ -137,17 +137,7 @@
 										<c:out value="${statuses.getStatus()}" />
 									</h5>
 								</div>
-								<c:forEach items="${comments}" var="comments" varStatus="i"
-									begin="0">
-									<div class="card-body">
-										<h5 class="card-text">
-											<c:if
-												test="${statuses.getId() == comments.getStatus().getId()}">
-												<c:out value="${comments.getComment()}" />
-											</c:if>
-										</h5>
-									</div>
-								</c:forEach>
+
 								<div class="card-footer">
 									<form class="form"
 										action="${pageContext.request.contextPath}/like" method="post"
@@ -157,6 +147,30 @@
 											<i class="fa fa-gittip"></i> Like
 										</button>
 									</form>
+																	<c:forEach items="${comments}" var="comments" varStatus="i"
+									begin="0">
+									<div class="comment-box">
+										<c:if
+											test="${statuses.getId() == comments.getStatus().getId()}">
+											<span class="commenter-pic"> <img
+												src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+												class="img-fluid"> <a href="profile.jsp" class="h4">
+												
+													<c:out value="${comments.getProfile().getFirstName()} ${comments.getProfile().getLastName()} " /> 
+													</a> <span class="comment-time h6">
+													<c:out value="${comments.getCreated()}" /> 
+													 </span> <span class="dropdown">
+													
+													<h5 class="comment-txt more">
+														<c:out value="${comments.getComment()}" />
+
+													</h5>
+
+											</span>
+											</span>
+										</c:if>
+									</div>
+								</c:forEach>
 									<br> <br>
 									<div class="comment-box add-comment">
 										<div class="form-inline">
@@ -176,8 +190,7 @@
 														<i class="fa fa-comment"></i>Comment
 
 													</button>
-													
-													
+
 													<input type="hidden" id="statusId" name="statusId"
 														value="<c:out value="${statuses.getId()}" />"> <input
 														type="hidden" id="statusProfileName"
