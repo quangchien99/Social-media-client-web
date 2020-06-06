@@ -136,7 +136,7 @@
 
 								<div class="card-footer">
 									<form class="form"
-										action="${pageContext.request.contextPath}/like" method="post"
+										action="" method="post"
 										id="like">
 										<label class="sr-only" for="like">post</label>
 										<button type="submit" class="h5 btn btn-outline-danger btn-sm">
@@ -150,7 +150,7 @@
 											test="${statuses.getId() == comments.getStatus().getId()}">
 											<span class="commenter-pic"> <img
 												src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
-												class="img-fluid"> <a href="profile.jsp" class="h4">
+												class="img-fluid"> <a href="#" class="h4">
 												
 													<c:out value="${comments.getProfile().getFirstName()} ${comments.getProfile().getLastName()} " /> 
 													</a> <span class="comment-time h6">

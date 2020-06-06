@@ -1,16 +1,12 @@
 package edu.hanu.social_media_platform_client.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import edu.hanu.social_media_platform_client.model.Comment;
 import edu.hanu.social_media_platform_client.model.Profile;
 import edu.hanu.social_media_platform_client.service.CommentService;
@@ -54,7 +50,7 @@ public class CommentServlet extends HttpServlet {
 		} else {
 			cmt.setComment(comment);
 			cmt.setProfile(profile);
-			profile = profileService.getProfile(statusProfileName);
+			profile = profileService.getProfile(name);
 			cmt.setProfile(profile);
 			cmt.setStatus(statusService.getStatus(Long.parseLong(statusId)));
 			commentService.addComment(cmt);
