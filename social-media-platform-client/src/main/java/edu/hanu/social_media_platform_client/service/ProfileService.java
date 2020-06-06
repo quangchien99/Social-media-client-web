@@ -75,6 +75,14 @@ public class ProfileService {
 		return profile;
 	}
 
+	public Profile editProfile(Profile profile) {
+		if (profile.getProfileName().isEmpty()) {
+			return null;
+		}
+		dao.edit(profile);
+		return profile;
+	}
+
 	public void removeProfile(String profileName) throws DataNotFoundException {
 		Profile profile = dao.get(profileName);
 		if (profile == null) {

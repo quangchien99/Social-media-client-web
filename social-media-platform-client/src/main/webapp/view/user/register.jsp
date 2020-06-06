@@ -106,8 +106,7 @@
 
 									</div>
 									<c:if test="${not empty errorMessage2}">
-										<font color="red"> <c:out value="${errorMessage2}" />
-										</font>
+										<script>alert("Invalid Phone Number")</script>	
 									</c:if>
 									<div class="form-group input-group">
 										<div class="input-group-prepend">

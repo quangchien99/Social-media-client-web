@@ -77,7 +77,7 @@
 		<servlet-name>LikeController</servlet-name>
 		<url-pattern>/like</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ProfileController</servlet-name>
 		<servlet-class>edu.hanu.social_media_platform_client.controller.ProfileServlet
@@ -88,4 +88,75 @@
 		<url-pattern>/profile</url-pattern>
 	</servlet-mapping>
 
+
+	<servlet>
+		<servlet-name>PostStatusInProfileController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.PostStatusInProfileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostStatusInProfileController</servlet-name>
+		<url-pattern>/postStatusProfile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CommentInProfileController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.CommentInProfileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommentInProfileController</servlet-name>
+		<url-pattern>/commentStatusProfile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EditProfileController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.EditProfileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditProfileController</servlet-name>
+		<url-pattern>/editProfile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteStatusController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.DeleteStatusServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteStatusController</servlet-name>
+		<url-pattern>/deleteStatus</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>SearchFriendController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.SearchFriendServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchFriendController</servlet-name>
+		<url-pattern>/searchFriend</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddFriendController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.AddFriendServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddFriendController</servlet-name>
+		<url-pattern>/addFriend</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UnFriendController</servlet-name>
+		<servlet-class>edu.hanu.social_media_platform_client.controller.UnfriendServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UnFriendController</servlet-name>
+		<url-pattern>/unFriend</url-pattern>
+	</servlet-mapping>
 </web-app>

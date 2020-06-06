@@ -53,7 +53,7 @@
 					</i> Messages
 				</a></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
+			<form class="form-inline my-2 my-lg-0" action="searchFriend" method="post">
 				<a href="${pageContext.request.contextPath}/profile" class="hello h5">
   <%
       String firstName = (String) session.getAttribute("firstName");
@@ -62,17 +62,13 @@
   %>
 				
 				</a> &nbsp;&nbsp;&nbsp;&nbsp; <input
-					class="form-control form-control-lg" width="200" type="text"
+					class="form-control form-control-lg" width="200" type="text" name="searchName" id="searchName" 
 					placeholder="Search" aria-label="Search">
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="btn btn-outline-success btn-lg" type="submit">Search</button>
 			</form>
 			<ul class="navbar-nav ">
-				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/view/user/homePage.jsp"> <i class="fa fa-users"> <span
-							class="badge badge-info">11</span>
-					</i> Friend Request
-				</a></li>
+
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/view/user/login.jsp"> <i class="fa fa-power-off"> </i>
 						Log out

@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.hanu.social_media_platform_client.model.Comment;
-import edu.hanu.social_media_platform_client.model.FriendList;
+import edu.hanu.social_media_platform_client.model.Like;
 import edu.hanu.social_media_platform_client.model.Profile;
 import edu.hanu.social_media_platform_client.model.Status;
 import edu.hanu.social_media_platform_client.service.CommentService;
 import edu.hanu.social_media_platform_client.service.FriendListService;
+import edu.hanu.social_media_platform_client.service.LikeService;
+import edu.hanu.social_media_platform_client.service.ProfileService;
 import edu.hanu.social_media_platform_client.service.StatusService;
 
 public class HomePageServlet extends HttpServlet {
@@ -25,6 +27,8 @@ public class HomePageServlet extends HttpServlet {
 	FriendListService friendListService = new FriendListService();
 	StatusService statusService = new StatusService();
 	CommentService commentService = new CommentService();
+	ProfileService profileService = new ProfileService();
+	LikeService likeService = new LikeService();
 	List<Profile> friends;
 
 	/**
@@ -44,6 +48,7 @@ public class HomePageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String profileName = (String) session.getAttribute("name");
+		@SuppressWarnings("unused")
 		String statusId = request.getParameter("statusId");
 		// System.out.println("StatusID " + statusId);
 		System.out.println("Hehe " + profileName);
@@ -53,6 +58,9 @@ public class HomePageServlet extends HttpServlet {
 		for (Status status : statuses) {
 			System.out.println(status);
 		}
+
+		Profile profile = profileService.getProfile(profileName);
+
 		List<Comment> comments = getCommentInPost();
 		System.out.println(comments.size() + " check size cmtt");
 		for (Comment comment : comments) {
@@ -60,6 +68,10 @@ public class HomePageServlet extends HttpServlet {
 		}
 		// comments = getCommentInPost(Integer.parseInt(statusId));
 		// comments.get(0).getCreated()
+		
+		List<Like> allLikes = getAllLikes();
+		request.setAttribute("allLikes", allLikes);
+		request.setAttribute("profile", profile);
 		request.setAttribute("comments", comments);
 		request.setAttribute("statuses", statuses);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/homePage.jsp");
@@ -74,7 +86,6 @@ public class HomePageServlet extends HttpServlet {
 		}
 		List<Status> filteredStatuses = new ArrayList<Status>();
 		for (int i = 0; i < friends.size(); i++) {
-			System.out.println(friends.get(i).toString() + "check cuuu");
 			for (Status status : statuses) {
 				if (status.getProfile().getProfileName().equals(friends.get(i).getProfileName())) {
 					filteredStatuses.add(status);
@@ -87,16 +98,22 @@ public class HomePageServlet extends HttpServlet {
 
 	public List<Comment> getCommentInPost() {
 		List<Comment> comments = commentService.getAllComments();
-//		List<Comment> filteredComments = new ArrayList<Comment>();
-//		for (Comment c : comments) {
-//			if (c.getStatus().getId() == statusId) {
-//				filteredComments.add(c);
-//			}
-//		}
-//		for (Comment c : filteredComments) {
-//			System.out.println(c.toString());
-//		}
-//		return filteredComments;
 		return comments;
+	}
+
+	public List<Like> getAllLikes() {
+		@SuppressWarnings("unused")
+		List<Like> likes = new ArrayList<Like>();
+		return likes = likeService.getAllLikes();
+	}
+	public int countLike(String statusId) {
+		List<Like> likes = new ArrayList<Like>();
+		int count = 0;
+		for(Like like : likes) {
+			if(like.getStatus().getId() == Integer.parseInt(statusId)) {
+				count++;
+			}
+		}
+		return count;
 	}
 }

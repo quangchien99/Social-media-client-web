@@ -55,7 +55,7 @@ public class StatusDAO implements DAO<Status>{
 	}
 	
 	public void delete(long id) {
-		Response response = resourceTargetId.resolveTemplate("resourceName", "status")
+		Response response = resourceTargetId.resolveTemplate("resourceName", "statuses")
 				.resolveTemplate("resourceId", id)
 				.request()
 				.delete();

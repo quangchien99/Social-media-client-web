@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container-login100"
-		style="background-image: url('${pageContext.request.contextPath}/image/signin.jpg');">
+		style="background-color: #aacfcf;">
 		<div class="wrapper fadeInDown">
 			<div id="formContent">
 				<span class="fadeIn first"> Login</span>
@@ -30,19 +30,19 @@
 						</font>
 					</c:if>
 
-					<ul>
-						<a href="${pageContext.request.contextPath}/forgot">Forgot Password?</a>
-					</ul>
-					<ul>
-						<a href="${pageContext.request.contextPath}/register">Register</a>
-					</ul>
+					<div><a href="${pageContext.request.contextPath}/forgot">Forgot Password?</a></div>
+						
+					
+					<div><a href="${pageContext.request.contextPath}/register">Register</a></div>
+						
+					
 
 					<input type="submit" id="submit" class="fadeIn fourth"
 						value="Log In">
 
-					<ul>
-						<a href="https://www.facebook.com/dialog/oauth?client_id=889791844829993&redirect_uri=http://localhost:8080/social-media-platform/AccessFacebook">Login with <strong>Facebook</strong></a>
-					</ul>
+					<div><a href="https://www.facebook.com/dialog/oauth?client_id=889791844829993&redirect_uri=http://localhost:8080/social-media-platform/AccessFacebook">Login with <strong>Facebook</strong></a>
+					</div>
+						
 				</form>
 			</div>
 		</div>

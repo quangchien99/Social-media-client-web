@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 
 import edu.hanu.social_media_platform_client.model.Profile;
 
-public class ProfileDAO implements DAO<Profile>{
+public class ProfileDAO implements DAO<Profile> {
 	private Client client = ClientBuilder.newClient();
 	private final WebTarget baseTarget = client.target("http://localhost:8080/social-media-platform/webapi");
 	private WebTarget resourceTarget = baseTarget.path("/{resourceName}");
@@ -29,13 +29,13 @@ public class ProfileDAO implements DAO<Profile>{
 	}
 
 	public void save(Profile profile) {
-		//C1
+		// C1
 		Response response = resourceTarget.resolveTemplate("resourceName", "profiles").request()
 				.post(Entity.json(profile));
 		if (response.getStatus() != 201) {
 			System.err.println("error");
 		}
-		//C2
+		// C2
 //		Invocation.Builder builder = resourceTarget.resolveTemplate("resourceName", "profiles").request().accept(MediaType.APPLICATION_JSON);
 //		Response response = builder.post(Entity.json(profile));
 //		if (response.getStatus() != 201) {
@@ -53,8 +53,18 @@ public class ProfileDAO implements DAO<Profile>{
 	public void update(Profile profile) {
 		Response response = resourceTargetId.resolveTemplate("resourceName", "profiles")
 				.resolveTemplate("resourceId", profile.getProfileName()).request().put(Entity.json(profile));
-		if (response.getStatus() != 204) {
+		System.out.println(response.getStatus());
+		if (response.getStatus() != 200) {
 			System.err.println("ProfileDAO.update()");
+		}
+	}
+
+	public void edit(Profile profile) {
+		Response response = resourceTarget.resolveTemplate("resourceName", "profiles").path("/edit/{resourceId}")
+				.resolveTemplate("resourceId", profile.getProfileName()).request().put(Entity.json(profile));
+		System.out.println(response.getStatus());
+		if (response.getStatus() != 200) {
+			System.err.println("ProfileDAO.edit()");
 		}
 	}
 
@@ -68,33 +78,36 @@ public class ProfileDAO implements DAO<Profile>{
 
 	public static void main(String[] args) {
 		Profile p = new Profile();
-		p.setFirstName("Chien");
-		p.setLastName("Pham");
-		p.setProfileName("QuangChien19");
-		p.setPassword("12345678912");
-		p.setQuestion("what is favorite book ?");
-		p.setAnswer("harry potter");
+		p.setProfileName("Quangchien19");
+		p.setPassword("Quangchien17@");
+		p.setFirstName("Chiennmm");
+		p.setLastName("Phamm");
+//		p.setProfileName("QuangChien19");
+//		p.setPassword("Quangchien17@");
+//		p.setQuestion("what is favorite book ?");
+//		p.setAnswer("harry potter");
 		System.out.println(p.toString());
 		ProfileDAO dao = new ProfileDAO();
-		dao.save(p);
+		dao.edit(p);
+//		dao.save(p);
 //		for(Profile p : dao.getAll()) {
 //			System.out.println(p.toString());
 //		}
 
 		System.out.println(dao.get("QuangChien19").toString());
 	}
-	
+
 	@SuppressWarnings(value = { "unused" })
 	@Override
 	public Profile get(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@SuppressWarnings(value = { "unused" })
 	@Override
 	public void delete(long id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

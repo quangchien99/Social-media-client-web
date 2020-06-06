@@ -17,4 +17,11 @@ public class FriendListService {
 		FriendList friendlist = dao.get(profileName);
 		return friendlist.getFriend();
 	}
+
+	public void deleteFriend(String profileName, String friendName) {
+		dao.delete(profileName, friendName);
+	}
+	public void addFriend(FriendList friendList) {
+		dao.save(friendList);
+	}
 }

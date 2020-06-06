@@ -37,14 +37,14 @@ public class LikeDAO implements DAO<Like>{
 	}
 	
 	public List<Like> getAll() {
-		List<Like> response = resourceTargetId.resolveTemplate("resourceName", "likes")
+		List<Like> response = resourceTarget.resolveTemplate("resourceName", "likes")
 												.request(MediaType.APPLICATION_JSON)
 												.get(new GenericType<List<Like>>() {});
 		return response;
 	}
 	
 	public void update(Like like) {
-		Response response = resourceTargetId.resolveTemplate("resourceName", "likes")
+		Response response = resourceTarget.resolveTemplate("resourceName", "likes")
 				.resolveTemplate("resourceId", like.getId())
 				.request()
 				.put(Entity.json(like));
@@ -54,7 +54,7 @@ public class LikeDAO implements DAO<Like>{
 	}
 	
 	public void delete(long id) {
-		Response response = resourceTargetId.resolveTemplate("resourceName", "likes")
+		Response response = resourceTarget.resolveTemplate("resourceName", "likes")
 				.resolveTemplate("resourceId", id)
 				.request()
 				.delete();

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="edu.hanu.social_media_platform_client.model.Status"%>
 <%@ page import="edu.hanu.social_media_platform_client.model.Comment"%>
+<%@ page import="edu.hanu.social_media_platform_client.model.Like"%>
 <%@ page import="java.util.List"%>
 <html>
 <head>
@@ -24,6 +25,9 @@
 </head>
 
 <body>
+	<%
+		List<Like> allLikes = (List<Like>) request.getAttribute("allLikes");
+	%>
 	<%
 		List<Status> statuses = (List<Status>) request.getAttribute("statuses");
 	%>
@@ -83,6 +87,8 @@
 							</div>
 						</form>
 
+
+
 						<div class="card gedf-card">
 							<c:forEach items="${statuses}" var="statuses" varStatus="i"
 								begin="0">
@@ -110,16 +116,6 @@
 													aria-expanded="false">
 													<i class="fa fa-ellipsis-h"></i>
 												</button>
-												<div class="dropdown-menu dropdown-menu-right"
-													aria-labelledby="gedf-drop1">
-													<a class="h5 dropdown-item"
-														href="delete?id =${status.statusId}" onclick="bcd()"><strong>Delete</strong>
-														<script>
-															function bcd() {
-																confirm("Are you sure you want to delete this status?");
-															}
-														</script></a>
-												</div>
 											</div>
 										</div>
 									</div>
@@ -145,7 +141,7 @@
 										<label class="sr-only" for="like">post</label>
 										<button type="submit" class="h5 btn btn-outline-danger btn-sm">
 											<i class="fa fa-gittip"></i> Like
-										</button>
+										</button> 
 									</form>
 																	<c:forEach items="${comments}" var="comments" varStatus="i"
 									begin="0">
@@ -160,12 +156,9 @@
 													</a> <span class="comment-time h6">
 													<c:out value="${comments.getCreated()}" /> 
 													 </span> <span class="dropdown">
-													
 													<h5 class="comment-txt more">
 														<c:out value="${comments.getComment()}" />
-
 													</h5>
-
 											</span>
 											</span>
 										</c:if>
@@ -197,8 +190,7 @@
 														name="statusProfileName"
 														value="<c:out value="${statuses.getProfile().getProfileName()}" />">
 													<c:if test="${not empty errorMessage1}">
-														<font color="red"> <c:out value="${errorMessage1}" />
-														</font>
+														<script>alert("PLEASE WRITE SOMETHING")</script>	
 													</c:if>
 												</form>
 											</div>

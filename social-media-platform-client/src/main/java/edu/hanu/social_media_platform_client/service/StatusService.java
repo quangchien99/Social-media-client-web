@@ -26,4 +26,8 @@ public class StatusService {
 		Status status = dao.get(id);
 		return status;
 	}
+
+	public void deleteStatus(String id) {
+		dao.delete(Long.parseLong(id));
+	}
 }

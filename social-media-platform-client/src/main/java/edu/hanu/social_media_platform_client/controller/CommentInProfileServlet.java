@@ -1,8 +1,6 @@
 package edu.hanu.social_media_platform_client.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,16 +15,24 @@ import edu.hanu.social_media_platform_client.service.CommentService;
 import edu.hanu.social_media_platform_client.service.ProfileService;
 import edu.hanu.social_media_platform_client.service.StatusService;
 
-public class CommentServlet extends HttpServlet {
+public class CommentInProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProfileService profileService = new ProfileService();
 	CommentService commentService = new CommentService();
 	StatusService statusService = new StatusService();
 
-	public CommentServlet() {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CommentInProfileServlet() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -48,7 +54,7 @@ public class CommentServlet extends HttpServlet {
 		System.out.println(name);
 		if (comment.isEmpty()) {
 			request.setAttribute("errorMessage1", "Write something");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/profile");
 			dispatcher.forward(request, response);
 			System.out.println("Failed");
 		} else {
@@ -58,9 +64,8 @@ public class CommentServlet extends HttpServlet {
 			cmt.setProfile(profile);
 			cmt.setStatus(statusService.getStatus(Long.parseLong(statusId)));
 			commentService.addComment(cmt);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/profile");
 			dispatcher.forward(request, response);
 		}
 	}
-
 }

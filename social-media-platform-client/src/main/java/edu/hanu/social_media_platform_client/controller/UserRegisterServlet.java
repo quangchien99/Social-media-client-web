@@ -85,7 +85,7 @@ public class UserRegisterServlet extends HttpServlet {
 			request.setAttribute("errorMessage1", "Invalid email !");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/register.jsp");
 			dispatcher.forward(request, response);
-		} else if (!Validator.isStringNumeric(phoneNumber)) {
+		} else if (phoneNumber.isEmpty() || !Validator.isStringNumeric(phoneNumber)) {
 			HttpSession session = request.getSession();
 			session.invalidate();
 			request.setAttribute("errorMessage2", "Invalid phone number !");

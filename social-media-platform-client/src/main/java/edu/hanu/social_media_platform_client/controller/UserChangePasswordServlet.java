@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import edu.hanu.social_media_platform_client.dao.ProfileDAO;
 import edu.hanu.social_media_platform_client.model.Profile;
+import edu.hanu.social_media_platform_client.service.ProfileService;
 import edu.hanu.social_media_platform_client.utils.PasswordAuthentication;
 import edu.hanu.social_media_platform_client.utils.Validator;
 import javassist.runtime.Cflow;
@@ -46,8 +47,8 @@ public class UserChangePasswordServlet extends HttpServlet {
 		System.out.println(name);
 		PasswordAuthentication authentication = new PasswordAuthentication();
 		Profile profile = new Profile();
-		ProfileDAO profileDAO = new ProfileDAO();
-		profile = profileDAO.get(name);
+		ProfileService profileService = new ProfileService();
+		profile = profileService.getProfile(name);
 		System.out.println(profile.toString());
 		System.out.println("check2");
 
@@ -66,17 +67,17 @@ public class UserChangePasswordServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/changePassword.jsp");
 				dispatcher.forward(request, response);
 				System.out.println("Failed");
-			} else if (newPassword.equals(cfnewPassword)) {
+			} else if (!newPassword.equals(cfnewPassword)) {
 
-				profile.setPassword(newPassword);
-				profileDAO.update(profile);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/login.jsp");
-				dispatcher.forward(request, response);
-			} else {
 				request.setAttribute("errorMessage", "Password does not match");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/changePassword.jsp");
 				dispatcher.forward(request, response);
 				System.out.println("Failed");
+			} else {
+				profile.setPassword(newPassword);
+				profileService.updateProfile(profile);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/login.jsp");
+				dispatcher.forward(request, response);
 			}
 		}
 	}
