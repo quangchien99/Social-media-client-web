@@ -32,13 +32,12 @@ public class SearchFriendServlet extends HttpServlet {
 		System.out.println("Searching for : " + searchName);
 		List<Profile> notFollowing = notFollowing(searchName, profileName);
 		List<Profile> following = following(searchName, profileName);
-		for (Profile p : following) {
-			System.out.println(p.toString());
-		}
-		System.out.println("11111111111111");
-		for (Profile p : notFollowing) {
-			System.out.println(p.toString());
-		}
+//		for (Profile p : following) {
+//			System.out.println(p.toString());
+//		}
+//		for (Profile p : notFollowing) {
+//			System.out.println(p.toString());
+//		}
 		request.setAttribute("friends", following);
 		request.setAttribute("profiles", notFollowing);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/searchFriend.jsp");
@@ -64,7 +63,6 @@ public class SearchFriendServlet extends HttpServlet {
 				}
 			}
 		}
-		System.out.println("check 1");
 		return filteredProfiles;
 	}
 
@@ -75,7 +73,6 @@ public class SearchFriendServlet extends HttpServlet {
 		if (allFriends.size() == 0) {
 			return allSearch;
 		} else {
-			System.out.println("check 2");
 			for (Profile p1 : allSearch) {
 				for (Profile p2 : allFriends) {
 					if (p1.getProfileName().equals(p2.getProfileName())) {
@@ -86,7 +83,6 @@ public class SearchFriendServlet extends HttpServlet {
 				}
 			}
 		}
-		System.out.println("check 3");
 		return notFollowing;
 	}
 
@@ -94,7 +90,6 @@ public class SearchFriendServlet extends HttpServlet {
 		List<Profile> allFriends = friendListService.getFriendList(profileName);
 		List<Profile> allSearch = getProfiles(searchName);
 		List<Profile> following = new ArrayList<Profile>();
-		System.out.println("check 4");
 		if (allFriends.size() == 0) {
 			return following;
 		} else {
@@ -108,7 +103,6 @@ public class SearchFriendServlet extends HttpServlet {
 				}
 			}
 		}
-		System.out.println("check 5");
 		return following;
 	}
 }
