@@ -31,13 +31,15 @@ public class SearchFriendServlet extends HttpServlet {
 		String searchName = request.getParameter("searchName");
 		System.out.println("Searching for : " + searchName);
 		List<Profile> notFollowing = notFollowing(searchName, profileName);
+		System.out.println(notFollowing.size());
 		List<Profile> following = following(searchName, profileName);
-//		for (Profile p : following) {
-//			System.out.println(p.toString());
-//		}
-//		for (Profile p : notFollowing) {
-//			System.out.println(p.toString());
-//		}
+		System.out.println("FOllow" + following.size());
+		for (Profile p : following) {
+			System.out.println(p.toString());
+		}
+		for (Profile p : notFollowing) {
+			System.out.println(p.toString());
+		}
 		request.setAttribute("friends", following);
 		request.setAttribute("profiles", notFollowing);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/view/user/searchFriend.jsp");
@@ -68,19 +70,23 @@ public class SearchFriendServlet extends HttpServlet {
 
 	public List<Profile> notFollowing(String searchName, String profileName) {
 		List<Profile> allFriends = friendListService.getFriendList(profileName);
+		for (Profile p : allFriends) {
+			System.out.println("all friends" + p.toString());
+		}
 		List<Profile> allSearch = getProfiles(searchName);
+		for (Profile p : allSearch) {
+			System.out.println("all search" + p.toString());
+		}
 		List<Profile> notFollowing = new ArrayList<Profile>();
 		if (allFriends.size() == 0) {
 			return allSearch;
 		} else {
 			for (Profile p1 : allSearch) {
-				for (Profile p2 : allFriends) {
-					if (p1.getProfileName().equals(p2.getProfileName())) {
-						continue;
-					} else {
-						notFollowing.add(p1);
-					}
+
+				if (!allFriends.contains(p1)) {
+					notFollowing.add(p1);
 				}
+
 			}
 		}
 		return notFollowing;
@@ -94,12 +100,8 @@ public class SearchFriendServlet extends HttpServlet {
 			return following;
 		} else {
 			for (Profile p1 : allSearch) {
-				for (Profile p2 : allFriends) {
-					if (p1.getProfileName().equals(p2.getProfileName())) {
-						following.add(p1);
-					} else {
-						continue;
-					}
+				if (allFriends.contains(p1)) {
+					following.add(p1);
 				}
 			}
 		}
